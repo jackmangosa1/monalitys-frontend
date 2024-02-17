@@ -4,12 +4,67 @@ import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import Illustration from "../assets/illustration.svg";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+interface FormInput {
+  email: string;
+  password: string;
+}
+
+interface FormError {
+  email: string;
+  password: string;
+}
 
 const page = () => {
   const router = useRouter();
+  const [formData, setFormData] = useState<FormInput>({
+    email: "",
+    password: "",
+  });
+  const [formError, setFormError] = useState<FormError>({
+    email: "",
+    password: "",
+  });
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const errors = validate(formData);
+    setFormError(errors);
+    if (Object.values(formError).every((error) => !error)) {
+      console.log("Sign in user");
+    }
+  };
+
+  const validate = (formInput: FormInput): FormError => {
+    const errors: FormError = {
+      email: "",
+      password: "",
+    };
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    if (!formInput.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(formInput.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+
+    if (!formInput.password) {
+      errors.password = "Password is required!";
+    }
+    return errors;
+  };
+
   return (
     <Container className="flex gap-10 p-14">
-      <div className="flex flex-1 flex-col gap-8 lg:px-20 lg:pt-16">
+      <form
+        className="flex flex-1 flex-col gap-8 lg:px-20 lg:pt-16"
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col gap-1">
           <p className="text-2xl font-bold sm:text-3xl">Sign In</p>
           <p className="text-themeGrayText  text-sm  font-medium sm:text-base">
@@ -25,9 +80,12 @@ const page = () => {
             <input
               type="text"
               name="email"
+              value={formData.email}
+              onChange={handleInput}
               id="email"
               className="p-2 w-full outline-none border border-gray-300 rounded lg:w-auto"
             />
+            <p className="text-red-500 text-lg">{formError.email}</p>
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="password" className="font-medium">
@@ -36,9 +94,12 @@ const page = () => {
             <input
               type="password"
               name="password"
+              value={formData.password}
+              onChange={handleInput}
               id="password"
               className="p-2 w-full outline-none border border-gray-300 rounded lg:w-auto"
             />
+            <p className="text-red-500 text-lg">{formError.password}</p>
           </div>
         </div>
 
@@ -56,7 +117,7 @@ const page = () => {
             <span className="font-bold hover:cursor-pointer">Sign Up</span>
           </p>
         </div>
-      </div>
+      </form>
 
       <div className="hidden w-full  md:flex md:items-center md:justify-center md:flex-1 ">
         <Image src={Illustration} alt="illustration" loading="lazy" />
