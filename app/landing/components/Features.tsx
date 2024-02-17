@@ -10,15 +10,15 @@ const Features = () => {
         <div className="flex flex-col item-start gap-4 lg:items-center">
           <div className="flex flex-col items-center gap-2">
             <p className="font-bold text-3xl  sm:text-[2.8rem]">
-              Build a customer-centric
+              Unique Combination of
             </p>
             <p className="font-bold text-3xl sm:text-[2.8rem]">
-              marketing strategy
+              Strategy and Technology
             </p>
           </div>
-          <p className="text-themeGrayText font-medium text-center">
-            Clearly state the unique benefits of your Saas business
-          </p>
+          {/* <p className="text-themeGrayText font-medium text-center">
+            Skyrocket your organization
+          </p> */}
         </div>
 
         <div className="flex flex-col items-center lg:flex-row lg:justify-between">
