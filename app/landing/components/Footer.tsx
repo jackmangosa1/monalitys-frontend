@@ -6,34 +6,42 @@ import {
   FaTwitter,
   FaFacebookF,
 } from "react-icons/fa";
+import Image from "next/image";
+import Logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
     <Container className="bg-themeBlack text-themeWhite py-8 px-4  flex flex-col gap-16 justify-start items-start relative lg:py-10 lg:px-16 ">
-      <div className="mb-6 flex flex-col gap-16">
-        <p className="font-bold">Monalytics</p>
+      <div className="mb-6 flex flex-col gap-16" id="contacts">
+        <Image
+          src={Logo}
+          height={20}
+          width={100}
+          alt=""
+          className="rounded-md"
+        />
         <div className="flex flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-5">
-            <p className="font-bold"> Product</p>
+            <p className="font-bold">Contacts</p>
             <ul className=" text-themeGrayText hover:cursor-pointer">
-              <li>Integration</li>
-              <li>Customers</li>
-              <li>Pricing</li>
-              <li>Help Center</li>
+              <li className="flex gap-3 items-center">
+                <p>Address:</p>
+                <p>KN 78 NYARUNGENGE KIGALI</p>
+              </li>
+
+              <li className="flex gap-3 items-center">
+                <p>Phone:</p>
+                <p>+250 736 617 847</p>
+              </li>
+
+              <li className="flex gap-3 items-center">
+                <p> Help Center:</p>
+                <p>support@3m-system.co.rw</p>
+              </li>
             </ul>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <p className="font-bold"> Product</p>
-            <ul className=" text-themeGrayText hover:cursor-pointer">
-              <li>Integration</li>
-              <li>Customers</li>
-              <li>Pricing</li>
-              <li>Help Center</li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col gap-5">
+          {/* <div className="flex flex-col gap-5">
             <p className="font-bold"> Product</p>
             <ul className="text-themeGrayText hover:cursor-pointer">
               <li>Integration</li>
@@ -41,7 +49,7 @@ const Footer = () => {
               <li>Pricing</li>
               <li>Help Center</li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
 

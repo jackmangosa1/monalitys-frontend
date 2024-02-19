@@ -1,11 +1,14 @@
 import React from "react";
 import { IoMdClose } from "react-icons/io";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface MobileModalProps {
   setIsOpen: (state: boolean) => void;
 }
 
 const MobileMenu = ({ setIsOpen }: MobileModalProps) => {
+  const router = useRouter();
   return (
     <div className="bg-themeWhite border shadow-2xl shadow-themeGrayShadow px-10 py-5 rounded-xl w-52  absolute top-5 right-5 l">
       <IoMdClose
@@ -13,18 +16,30 @@ const MobileMenu = ({ setIsOpen }: MobileModalProps) => {
         onClick={() => setIsOpen(false)}
       />
       <ul className="flex flex-col mt-10 font-medium hover:cursor-pointer">
-        <li className="hover:text-slate-500">Home</li>
-        <li className="hover:text-slate-500">Features</li>
-        <li className="hover:text-slate-500">Products</li>
-        <li className="hover:text-slate-500">Pricing</li>
-        <li className="hover:text-slate-500">Contacts</li>
+        <Link href="../">
+          <li className="hover:text-slate-500">Home</li>
+        </Link>
+
+        <Link href="../#features">
+          <li className="hover:text-slate-500">Features</li>
+        </Link>
+
+        <Link href="../#contacts">
+          <li className="hover:text-slate-500">Contacts</li>
+        </Link>
       </ul>
       <br />
       <div className="flex flex-col gap-3 items-start">
-        <button className="bg-transparent border border-themeBlack px-6 py-2 rounded-3xl text-themeBlack  hover:bg-themeBlack hover:text-themeWhite w-full">
+        <button
+          className="bg-transparent border border-themeBlack px-6 py-2 rounded-3xl text-themeBlack  hover:bg-themeBlack hover:text-themeWhite w-full"
+          onClick={() => router.push("/login")}
+        >
           Sign In
         </button>
-        <button className="bg-themeBlack px-6 py-2 rounded-3xl text-themeWhite  hover:bg-slate-700 w-full">
+        <button
+          className="bg-themeBlack px-6 py-2 rounded-3xl text-themeWhite  hover:bg-slate-700 w-full"
+          onClick={() => router.push("/register")}
+        >
           Sign Up
         </button>
       </div>

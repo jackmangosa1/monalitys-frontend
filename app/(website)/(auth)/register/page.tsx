@@ -7,16 +7,20 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface FormInput {
-  companyName: string;
-  sectorOfOperation: string;
+  company_name: string;
+  sector: string;
+  country: string;
+  city: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
 interface FormError {
-  companyName: string;
-  sectorOfOperation: string;
+  company_name: string;
+  sector: string;
+  country: string;
+  city: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -25,15 +29,19 @@ interface FormError {
 const page = () => {
   const router = useRouter();
   const [formData, setFormData] = useState<FormInput>({
-    companyName: "",
-    sectorOfOperation: "",
+    company_name: "",
+    sector: "",
+    country: "",
+    city: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [formError, setFormError] = useState<FormError>({
-    companyName: "",
-    sectorOfOperation: "",
+    company_name: "",
+    sector: "",
+    country: "",
+    city: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -43,30 +51,60 @@ const page = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors = validate(formData);
     setFormError(errors);
     if (Object.values(formError).every((error) => !error)) {
-      console.log("send data to the backend");
+      const { confirmPassword, ...formDataWithoutConfirmPassword } = formData;
+      try {
+        const response = await fetch(
+          "https://monalytics-api.onrender.com/monalytics-api/api/v1/company/add",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formDataWithoutConfirmPassword),
+            mode: "no-cors",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Sign-up successful:", data);
+      } catch (error) {
+        console.error("Error sending sign-up request:", error);
+      }
     }
   };
 
   const validate = (formInput: FormInput): FormError => {
     const errors: FormError = {
-      companyName: "",
-      sectorOfOperation: "",
+      company_name: "",
+      sector: "",
+      country: "",
+      city: "",
       email: "",
       password: "",
       confirmPassword: "",
     };
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-    if (!formInput.companyName) {
-      errors.companyName = "Company name is required!";
+    if (!formInput.company_name) {
+      errors.company_name = "Company name is required!";
     }
-    if (!formInput.sectorOfOperation) {
-      errors.sectorOfOperation = "Sector of operation is required!";
+    if (!formInput.sector) {
+      errors.sector = "Sector of operation is required!";
+    }
+    if (!formInput.country) {
+      errors.sector = "Country is required!";
+    }
+    if (!formInput.city) {
+      errors.sector = "City is required!";
     }
     if (!formInput.email) {
       errors.email = "Email is required!";
@@ -106,35 +144,63 @@ const page = () => {
 
         <div className="flex flex-col gap-8 text-sm sm:text-base">
           <div className="flex flex-col gap-1">
-            <label htmlFor="companyName" className="font-medium">
+            <label htmlFor="company_name" className="font-medium">
               Company Name
             </label>
             <input
               type="text"
-              name="companyName"
-              id="companyName"
-              value={formData.companyName}
+              name="company_name"
+              id="company_name"
+              value={formData.company_name}
               onChange={handleFormInput}
               className="p-2 w-full outline-none border border-gray-300 rounded sm:w-auto"
             />
-            <p className="text-red-500 text-lg">{formError.companyName}</p>
+            <p className="text-red-500 text-lg">{formError.company_name}</p>
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="sectorOfOperation" className="font-medium">
+            <label htmlFor="sector" className="font-medium">
               Sector of operation
             </label>
             <input
               type="text"
-              name="sectorOfOperation"
-              id="sectorOfOperation"
-              value={formData.sectorOfOperation}
+              name="sector"
+              id="sector"
+              value={formData.sector}
               onChange={handleFormInput}
               className="p-2 w-full outline-none border border-gray-300 rounded lg:w-auto"
             />
-            <p className="text-red-500 text-lg">
-              {formError.sectorOfOperation}
-            </p>
+            <p className="text-red-500 text-lg">{formError.sector}</p>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="company_name" className="font-medium">
+              Country
+            </label>
+            <input
+              type="text"
+              name="country"
+              id="country"
+              value={formData.country}
+              onChange={handleFormInput}
+              className="p-2 w-full outline-none border border-gray-300 rounded sm:w-auto"
+            />
+            <p className="text-red-500 text-lg">{formError.country}</p>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="company_name" className="font-medium">
+              City
+            </label>
+            <input
+              type="text"
+              name="city"
+              id="city"
+              value={formData.city}
+              onChange={handleFormInput}
+              className="p-2 w-full outline-none border border-gray-300 rounded sm:w-auto"
+            />
+            <p className="text-red-500 text-lg">{formError.city}</p>
           </div>
 
           <div className="flex flex-col gap-1">

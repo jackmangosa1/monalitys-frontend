@@ -31,12 +31,35 @@ const page = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors = validate(formData);
     setFormError(errors);
     if (Object.values(formError).every((error) => !error)) {
-      console.log("Sign in user");
+      const stringFormData = JSON.stringify(formData);
+      console.log(stringFormData);
+      try {
+        const response = await fetch(
+          "https://monalytics-api.onrender.com/monalytics-api/api/v1/company/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+            mode: "no-cors",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        router.push("/app");
+      } catch (error) {
+        console.error("Error sending sign-up request:", error);
+      }
     }
   };
 

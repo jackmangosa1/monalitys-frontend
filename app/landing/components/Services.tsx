@@ -7,7 +7,10 @@ import { FaAngleRight } from "react-icons/fa6";
 const Services = () => {
   return (
     <Container className=" flex flex-col gap-20 md:gap-28 py-8 px-4 lg:p-16 ">
-      <div className="flex flex-col items-center  gap-16  lg:flex-row lg:items-center ">
+      <div
+        className="flex flex-col items-center  gap-16  lg:flex-row lg:items-center "
+        id="services"
+      >
         <Image
           src={Image1}
           alt="image-one"
@@ -16,14 +19,15 @@ const Services = () => {
         />
         <div className="flex flex-col items-center gap-8 lg:items-start">
           <div className="flex flex-col  gap-3 text-4xl font-bold tracking-tight leading-none text-themeBlack md:text-[2.8rem]">
-            <p>Engage your most</p>
-            <p>valuable visitors</p>
+            <p>Strategically Connect with </p>
+            <p>Audiences Across the Globe</p>
           </div>
 
           <p className="text-themeGrayText font-medium text-center lg:text-start">
-            We are a business consulting company based in America, we have been
-            operating for 20 years to help companies and businesses find the
-            best ideas
+            No matter where your business sets its sights, connect with
+            authentic voices that resonate with your target audience.
+            Collaborate with Instagram influencers with bloggers, YouTubers, ,
+            and more.
           </p>
 
           <div className="flex flex-col gap-5 items-center lg:items-start">
@@ -48,9 +52,9 @@ const Services = () => {
           </div>
 
           <p className="text-themeGrayText font-medium text-center lg:text-start">
-            We are a business consulting company based in America, we have been
-            operating for 20 years to help companies and businesses find the
-            best ideas
+            Track competitor analysis, customer trends, and industry shifts, all
+            in one place.Get customized dashboards and reports to track what
+            matters most to your business.
           </p>
 
           <div className="flex flex-col gap-5 items-center lg:items-start">

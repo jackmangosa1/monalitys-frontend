@@ -6,14 +6,18 @@ import { BsFillSearchHeartFill } from "react-icons/bs";
 const Features = () => {
   return (
     <Container className="mt-8">
-      <div className=" flex flex-col gap-20  bg-themeDarkWhiteBg py-8 px-4  lg:p-16 ">
+      <div
+        className=" flex flex-col gap-20  bg-themeDarkWhiteBg py-8 px-4  lg:p-16 "
+        id="features"
+      >
         <div className="flex flex-col item-start gap-4 lg:items-center">
           <div className="flex flex-col items-center gap-2">
             <p className="font-bold text-3xl  sm:text-[2.8rem]">
-              Unique Combination of
+              Unleash the power of combined
             </p>
+            <p></p>
             <p className="font-bold text-3xl sm:text-[2.8rem]">
-              Strategy and Technology
+              strategy and technology
             </p>
           </div>
           {/* <p className="text-themeGrayText font-medium text-center">
@@ -39,7 +43,8 @@ const Features = () => {
             </div>
             <p className="font-bold">Market research</p>
             <p className="text-themeGrayText text-center font-medium">
-              Make informed decisions by uncovering competitor strategies.
+              Uncover market trends & competitor insights in seconds and make
+              informed decisions.
             </p>
           </div>
 
@@ -49,18 +54,8 @@ const Features = () => {
             </div>
             <p className="font-bold">Influencer Marketing</p>
             <p className="text-themeGrayText text-center font-medium">
-              Find influencers aligning with your brand effortlessly.
-            </p>
-          </div>
-
-          <div className="p-5 flex flex-col gap-2  items-center w-72">
-            <div className="p-3 rounded-full bg-themeDarkShadow">
-              <SiGoogleanalytics className="text-3xl text-themeYellow " />
-            </div>
-            <p className="font-bold">Social Media Analysis</p>
-            <p className="text-themeGrayText text-center font-medium">
-              Stay ahead with live analytics on engagement, reach, and
-              sentiment.
+              Effortlessly identify, connect, and manage influencer partnerships
+              for your brand.
             </p>
           </div>
         </div>

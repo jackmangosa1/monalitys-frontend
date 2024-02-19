@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Logo from "../assets/logo.png";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +25,17 @@ const Navbar = () => {
         />
 
         <ul className="hidden lg:flex md:gap-8 md:font-bold md:hover:cursor-pointer">
-          <li className=" hover:text-slate-500">Home</li>
-          <li className=" hover:text-slate-500">Features</li>
-          <li className=" hover:text-slate-500">Contact</li>
+          <Link href="../">
+            <li className=" hover:text-slate-500">Home</li>
+          </Link>
+
+          <Link href="../#features">
+            <li className=" hover:text-slate-500">Features</li>
+          </Link>
+
+          <Link href="../#contacts">
+            <li className=" hover:text-slate-500">Contact</li>
+          </Link>
         </ul>
 
         <div className="hidden lg:flex md:gap-8">
